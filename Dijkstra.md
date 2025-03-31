@@ -34,7 +34,7 @@ The following steps are repeated until the current working node is the start nod
 
 &nbsp;&nbsp;The node of each edge of the current working node is inspected.\
 &nbsp;&nbsp;If it has a label and the status is permanent, the node of the next edge is inspected.\
-&nbsp;&nbsp;Else the sum of the sum of the weihgt in the current working node's label and the weight of the edge is calculated.\
+&nbsp;&nbsp;Else the sum of the weihgt in the current working node's label and the weight of the edge is calculated.\
 &nbsp;&nbsp;If the inspected node has a label, the calculated sum is compared to the weight in the inspected node's label.\
 &nbsp;&nbsp;If the sum is less than the weight in label, the weight is set to the sum and the node field of the inspected nodes's tag is set to the current working node.\
 &nbsp;&nbsp;If the inspected node has no label, one is assgined with the node field set to the current working node, the weight field to infinity and the status to tentative.\
