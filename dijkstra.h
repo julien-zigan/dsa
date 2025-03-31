@@ -12,7 +12,7 @@ typedef enum status_t {
 } STATUS_T;
 
 typedef struct label_t {
-    int sum_weight;
+    unsigned int sum_weight;
     struct node_t *next_hop;
     STATUS_T status;
 } LABEL_T;
@@ -20,7 +20,7 @@ typedef struct label_t {
 
 typedef struct edge_t {
     struct edge_t *next;
-    int weight;
+    unsigned int weight;
     struct node_t *node;
 
 } EDGE_T;
