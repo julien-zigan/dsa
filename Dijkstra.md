@@ -83,33 +83,38 @@ The path can be obtained by beginning with the start node, then repeatedly going
 
     current = end;
 
-    WHILE true:
+    WHILE true: {
         
         IF (current == start):
         break;
 
-    FOR EACH edge in current.edges:
-        
-        IF (edge.node.label.status == permanent):
-            continue;
-        
-        sum = current.label.accumulated_weight + edge.weight;
+        FOR EACH edge in current.edges: {
+            
+            IF (edge.node.label.status == permanent):
+                continue;
+            
+            sum = current.label.accumulated_weight + edge.weight;
 
-        IF (edge.node.label.status == tentative):
-            IF (sum < edge.node.label.accumulated_weight):
+            IF (edge.node.label.status == tentative):
+                IF (sum < edge.node.label.accumulated_weight):
+                    edge.node.label.next_hop = current;
+                    edge.node.label.accumulated_weight = sum;
+                    edge.node.label.status = tentative;
+                    tentatives.add(egde.node);
+                continue;
+            
+            IF (edge.node.label.status == NULL):
                 edge.node.label.next_hop = current;
                 edge.node.label.accumulated_weight = sum;
                 edge.node.label.status = tentative;
                 tentatives.add(egde.node);
-            continue;
-        
-        IF (edge.node.label.status == NULL):
-            edge.node.label.next_hop = current;
-            edge.node.label.accumulated_weight = sum;
-            edge.node.label.status = tentative;
-            tentatives.add(egde.node);
-        
+        }
+        current = tentatives(SMALLEST(label.accumulated_weight));
+        current.label.status = permanent;
+    }
 
-    WHILE (current != end):
+    WHILE (current != end): {
+
         print(current.name + " -> ");
         current = current.label.next_hop;
+    }   
