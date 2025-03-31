@@ -26,10 +26,10 @@ typedef struct edge_t {
 } EDGE_T;
 
 typedef struct node_t {
-    struct node_t *next; 
     char id[IDBUF];
     EDGE_T *edges;
     LABEL_T label;
+
 } NODE_T;
 
 #endif
