@@ -5,6 +5,7 @@
 #include <assert.h>
 
 #include "dijkstra.h"
+#include "jz_unit.h"
 
 #define TESTNODES 8
 #define INFINITY UINT_MAX
@@ -85,11 +86,24 @@ void print_nodes(NODE_T testenv[TESTNODES])
     }
 }
 
+void test_printnodes()
+{
+    init_test(__FUNCTION__);
+    assert_output_equals("abc", "def");
+}
+
+void test_test()
+{
+    init_test(__FUNCTION__);
+    assert_output_equals("abc", "abc");
+}
+
 int main(void) 
 {
+    init_testsuite();
     NODE_T testenv[TESTNODES];
     setup_testenv(testenv);
-    print_nodes(testenv);
-    printf("\e[0;32mTest OK!\e[0;37m\n");
+    test_printnodes();
+    test_test();
     return EXIT_SUCCESS;
 }
