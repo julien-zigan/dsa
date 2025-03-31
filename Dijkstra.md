@@ -54,3 +54,62 @@ The path can be obtained by beginning with the start node, then repeatedly going
 &nbsp;&nbsp;
 Once the start node is picked as the current working node, the shortest path from start node to destination node is found. 
 The path can be obtained by beginning with the start node, then repeatedly going to the preceding node, that is stored in the label until the destination node is reached. 
+
+### Implementation (Pseudocode)
+
+    type NODE:
+        - STRING name
+        - LIST \<EDGE\> edges
+        - LABEL label
+
+    type EDGE: 
+        - INT weight
+        - NODE node
+
+    type LABEL:
+        - INT accumulated_weight
+        - NODE next_hop 
+        - STATUS status
+
+    NODE start, end, current;
+    ORDERED LIST \<NODE\> tentatives;
+    INT sum;
+
+    start = getFromInput;
+    end = getFromInput;
+
+    end.label.accumulated_weight = 0;
+    end.label.status = permanent;
+
+    current = end;
+
+    WHILE true:
+        
+        IF (current == start):
+        break;
+
+    FOR EACH edge in current.edges:
+        
+        IF (edge.node.label.status == permanent):
+            continue;
+        
+        sum = current.label.accumulated_weight + edge.weight;
+
+        IF (edge.node.label.status == tentative):
+            IF (sum < edge.node.label.accumulated_weight):
+                edge.node.label.next_hop = current;
+                edge.node.label.accumulated_weight = sum;
+                edge.node.label.status = tentative;
+                tentatives.add(egde.node);
+            continue;
+        
+        IF (edge.node.label.status == NULL):
+            edge.node.label.next_hop = current;
+            edge.node.label.accumulated_weight = sum;
+            edge.node.label.status = tentative;
+            tentatives.add(egde.node);
+        
+
+    WHILE (current != end):
+        print(current.name + " -> ");
+        current = current.label.next_hop;
