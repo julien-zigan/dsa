@@ -7,6 +7,7 @@
 #define WHT "\e[0;37m"
 
 extern void init_testsuite();
+extern void print_test_stat();
 extern void init_test(const char *fname);
 extern void assert_output_equals(char *expected, char *actual);
 

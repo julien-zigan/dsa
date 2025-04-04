@@ -105,5 +105,6 @@ int main(void)
     setup_testenv(testenv);
     test_printnodes();
     test_test();
+    print_test_stat();
     return EXIT_SUCCESS;
 }
