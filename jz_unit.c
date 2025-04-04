@@ -12,7 +12,7 @@ void init_testsuite()
 
 void init_test(const char *fname)
 {
-    printf("%6i. %-20s", ++run, fname);
+    printf("%6i. %-30s", ++run, fname);
 }
 
 void print_test_stat()

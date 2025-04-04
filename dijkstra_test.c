@@ -65,6 +65,7 @@ void setup_testenv(NODE_T testenv[TESTNODES])
     add(&testenv[6].edges, &testenv[5], 2);    
 
     add(&testenv[7].edges, &testenv[6], 2);    
+    add(&testenv[7].edges, &testenv[5], 4);
     add(&testenv[7].edges, &testenv[4], 1);    
     add(&testenv[7].edges, &testenv[3], 2);    
 }
@@ -102,16 +103,21 @@ void test_printnodes(NODE_T testenv[TESTNODES])
         "E: B(3) C(1) H(1) \n"
         "F: B(4) G(2) H(4) \n"
         "G: F(2) H(2) \n"
-        "H: D(2) E(1) G(2) \n";
+        "H: D(2) E(1) F(4) G(2) \n";
                     
     sprint_nodes(buff, testenv);
     assert_output_equals(expected, buff);
 }
 
-void test_test()
-{
+void test_sprint_shortest_path(NODE_T testenv[TESTNODES]) {
     init_test(__FUNCTION__);
-    assert_output_equals("abc", "abc");
+    char buff[BUFSIZ];
+    char expected[] = 
+        "Shortest path from A to H: "
+        "A->C->E->H"
+        "\n";
+    sprint_shortest_path(buff, &testenv[0], &testenv[0]);
+    assert_output_equals(expected, buff);
 }
 
 int main(void) 
@@ -119,7 +125,10 @@ int main(void)
     init_testsuite();
     NODE_T testenv[TESTNODES];
     setup_testenv(testenv);
+    
     test_printnodes(testenv);
+    test_sprint_shortest_path(testenv);
+
     print_test_stat();
     return EXIT_SUCCESS;
 }
