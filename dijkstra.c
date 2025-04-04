@@ -6,10 +6,16 @@
 
 void ordered_add(NODE_T **tentatives, NODE_T *node)
 {
-    NODE_T *tmp = *tentatives;
+    NODE_T *tmp;
     
-    if (tmp == NULL) {
+    if (*tentatives = NULL) {
         *tentatives = node;
+        //TODO contiue here
+    }
+    else {
+        for (tmp = *tentatives; tmp; tmp = tmp->next) {
+            if tmp 
+        }
     }
 }
 
