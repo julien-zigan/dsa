@@ -70,26 +70,42 @@ void setup_testenv(NODE_T testenv[TESTNODES])
 }
 
 
-void print_nodes(NODE_T testenv[TESTNODES])
+void sprint_nodes(char buff[BUFSIZ], NODE_T testenv[TESTNODES])
 {
+    char item[64];
     EDGE_T *it;
     int i;
     for (i = 0; i < TESTNODES; i++) {
-        printf("%s: ", testenv[i].id);
+        sprintf(item, "%s: ", testenv[i].id);
+        strcat(buff, item);
         it = testenv[i].edges;
         while(it) {
-            printf("%s", it->node->id);
-            printf("(%u) ", it->weight);
+            sprintf(item,"%s", it->node->id);
+            strcat(buff, item);
+            sprintf(item,"(%u) ", it->weight);
+            strcat(buff, item);
             it = it->next;
         }
-        printf("\n");
+        strcat(buff, "\n");
     }
 }
 
-void test_printnodes()
-{
+void test_printnodes(NODE_T testenv[TESTNODES])
+{   
     init_test(__FUNCTION__);
-    assert_output_equals("abc", "def");
+    char buff[BUFSIZ];
+    char expected[] = 
+        "A: B(1) C(2) \n"
+        "B: A(1) D(2) E(3) F(4) \n"
+        "C: A(2) E(1) \n"
+        "D: B(2) H(2) \n"
+        "E: B(3) C(1) H(1) \n"
+        "F: B(4) G(2) H(4) \n"
+        "G: F(2) H(2) \n"
+        "H: D(2) E(1) G(2) \n";
+                    
+    sprint_nodes(buff, testenv);
+    assert_output_equals(expected, buff);
 }
 
 void test_test()
@@ -103,7 +119,7 @@ int main(void)
     init_testsuite();
     NODE_T testenv[TESTNODES];
     setup_testenv(testenv);
-    test_printnodes();
+    test_printnodes(testenv);
     test_test();
     print_test_stat();
     return EXIT_SUCCESS;
