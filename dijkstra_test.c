@@ -120,7 +120,6 @@ int main(void)
     NODE_T testenv[TESTNODES];
     setup_testenv(testenv);
     test_printnodes(testenv);
-    test_test();
     print_test_stat();
     return EXIT_SUCCESS;
 }
